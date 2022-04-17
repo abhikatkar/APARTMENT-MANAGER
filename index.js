@@ -1,5 +1,5 @@
 const express = require("express");
-const { required } = require("nodemon/lib/config");
+
 
 const connect = require("./Backend/src/Configs/db");
 

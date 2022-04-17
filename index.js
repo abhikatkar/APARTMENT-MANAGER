@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/item", dataController);
+app.use("/data", dataController);
 
 app.listen(process.env.PORT || 4455, async function () {
   try {

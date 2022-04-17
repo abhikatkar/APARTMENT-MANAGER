@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [item, setItem] = useState([]);
+  const [page, setPage] = useState(1);
+  const [value , setValue] = useState('');
 
   useEffect(() => {
     getData();
@@ -12,7 +14,7 @@ export const Home = () => {
 
   const getData = () => {
     axios
-      .get("https://apartment-management-app.herokuapp.com/data")
+      .get("https://apartment-management-app.herokuapp.com/data?_limit=3&_page=1`")
       .then((res) => {
         setItem([...res.data]);
       });
@@ -50,6 +52,14 @@ export const Home = () => {
       });
   };
 
+  const block = (value) => {
+    axios
+      .get(`https://apartment-management-app.herokuapp.com/data?block=${value}`)
+      .then((res) => {
+        setItem([...res.data]);
+      });
+  };
+
   return (
     <div>
       <h1>Home page</h1>
@@ -59,6 +69,10 @@ export const Home = () => {
       <div className="btn">
         <button onClick={own}>Filter by Owner</button>
         <button onClick={ten}>Filter by Tenant</button>
+        <div>
+            <input type="text" onChange={(e)=>{setValue(e.target.value)}} />
+            <button onClick={()=>{block(value)}}>search</button>
+        </div>
         <button onClick={asc}>Sort Flat No. in Ascending order</button>
         <button onClick={desc}>Sort Flat No. in Descendingly order</button>
       </div>

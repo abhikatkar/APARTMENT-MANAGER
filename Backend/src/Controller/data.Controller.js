@@ -31,10 +31,12 @@ router.get("", async (req, res) => {
         .lean()
         .exec();
       return res.send(data);
+    } else if (req.query.page) {
+      const data = await Data.find().skip(req.query.page*4).limit(4).lean().exec();
+    return res.send(data);
     }
 
-    const data = await Data.find().lean().exec();
-    return res.send(data);
+    
   } catch (err) {
     return res.send(err.message);
   }

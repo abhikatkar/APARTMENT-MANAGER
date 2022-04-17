@@ -9,6 +9,11 @@
   font-size: 20px;
  
 }
+.table tbody {
+    background-color: rgb(148, 249, 249);
+    
+   
+  }
 
 .table img {
   width: 380px;

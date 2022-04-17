@@ -4,7 +4,7 @@ const Data = require("../Model/data.Model");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("", async (req, res) => {
   try {
     const data = await Data.create(req.body);
     return res.send(data);
@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("", async (req, res) => {
   try {
     if (req.query.type) {
       const data = await Data.find({ type: { $eq: req.query.type } })
@@ -49,21 +49,13 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
-
 router.delete("/:id", async (req, res) => {
-    try {
-      const data = await Data.findByIdAndDelete(req.params.id)
-        .lean()
-        .exec();
-      return res.send(data);
-    } catch (err) {
-      return res.status(500).send(err.message);
-    }
-  });
+  try {
+    const data = await Data.findByIdAndDelete(req.params.id).lean().exec();
+    return res.send(data);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+});
 
-
-
-
-
-  module.exports = router;
+module.exports = router;

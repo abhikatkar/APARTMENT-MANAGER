@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
   const [item, setItem] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [value , setValue] = useState('');
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [page]);
 
   const getData = () => {
     axios
-      .get("https://apartment-management-app.herokuapp.com/data?_limit=3&_page=1`")
+      .get(`https://apartment-management-app.herokuapp.com/data?page=${page}`)
       .then((res) => {
         setItem([...res.data]);
       });
@@ -107,6 +107,20 @@ export const Home = () => {
           })}
         </tbody>
       </table>
+
+
+           
+      <div className="page">
+      <button onClick={()=>{
+          
+        setPage(()=>page-1)
+      }}>prep</button>
+      <h2>Page no. {page+1}</h2>
+      <button onClick={()=>{
+        setPage(()=>page+1)
+      }}>next</button>
+      </div>
+
     </div>
   );
 };

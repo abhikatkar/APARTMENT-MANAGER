@@ -36,6 +36,8 @@ router.get("", async (req, res) => {
     return res.send(data);
     }
 
+    const data = await Data.find().skip(req.query.page*4).limit(4).lean().exec();
+    return res.send(data);
     
   } catch (err) {
     return res.send(err.message);

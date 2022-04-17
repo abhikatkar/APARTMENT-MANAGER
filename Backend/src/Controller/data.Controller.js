@@ -4,7 +4,7 @@ const Data = require("../Model/data.Model");
 
 const router = express.Router();
 
-router.post("", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const data = await Data.create(req.body);
     return res.send(data);
@@ -13,7 +13,7 @@ router.post("", async (req, res) => {
   }
 });
 
-router.get("", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     if (req.query.type) {
       const data = await Data.find({ type: { $eq: req.query.type } })

@@ -15,23 +15,23 @@ router.post("", async (req, res) => {
 
 router.get("", async (req, res) => {
   try {
-    // if (req.query.type) {
-    //   const data = await Data.find({ type: { $eq: req.query.type } })
-    //     .lean()
-    //     .exec();
-    //   return res.send(data);
-    // } else if (req.query.asc) {
-    //   const data = await Data.find().sort({ flat_no: 1 }).lean().exec();
-    //   return res.send(data);
-    // } else if (req.query.desc) {
-    //   const data = await Data.find().sort({ flat_no: -1 }).lean().exec();
-    //   return res.send(data);
-    // } else if (req.query.block) {
-    //   const data = await Data.find({ block: { $eq: req.query.block } })
-    //     .lean()
-    //     .exec();
-    //   return res.send(data);
-    // }
+    if (req.query.type) {
+      const data = await Data.find({ type: { $eq: req.query.type } })
+        .lean()
+        .exec();
+      return res.send(data);
+    } else if (req.query.asc) {
+      const data = await Data.find().sort({ flat_no: 1 }).lean().exec();
+      return res.send(data);
+    } else if (req.query.desc) {
+      const data = await Data.find().sort({ flat_no: -1 }).lean().exec();
+      return res.send(data);
+    } else if (req.query.block) {
+      const data = await Data.find({ block: { $eq: req.query.block } })
+        .lean()
+        .exec();
+      return res.send(data);
+    }
 
     const data = await Data.find().lean().exec();
     return res.send(data);
@@ -59,3 +59,6 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+
+
